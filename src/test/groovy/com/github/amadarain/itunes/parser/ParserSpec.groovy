@@ -143,5 +143,34 @@ class ParserSpec extends Specification {
         lib.playlists[10].tracks.size() == 2
         lib.playlists[10].tracks.find { it.name == 'Track 1234' }
     }
-    Reader createReader(String str) { new StringReader(str) }
+    def "mojibake"() {
+        def xml = createReader(
+"""<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Major Version</key><integer>1</integer>
+    <key>Minor Version</key><integer>1</integer>
+    <key>Application Version</key><string>12.3.2.35</string>
+    <key>Date</key><date>2016-02-10T16:05:37Z</date>
+    <key>Features</key><integer>5</integer>
+    <key>Show Content Ratings</key><true/>
+    <key>Library Persistent ID</key><string>7FE190A91827057C</string>
+    <key>Tracks</key><dict>
+        <key>1234</key><dict>
+            <key>Track ID</key><integer>1234</integer>
+            <key>Name</key><string>透明な虹</string>
+        </dict>
+    </dict>
+    <key>Playlists</key><array>
+    </array>
+</dict>
+</plist>
+""")
+        def lib = parser.parse(xml)
+        expect:
+        lib.tracks[1234].name == new String('透明な虹'.getBytes('utf-8'), 'utf-8')
+        println lib.tracks[1234].name
+    }
+    Reader createReader(String str) { new StringReader(new String(str.getBytes('utf-8'), 'utf-8')) }
 } 
