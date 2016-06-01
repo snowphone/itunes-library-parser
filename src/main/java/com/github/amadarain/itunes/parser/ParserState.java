@@ -14,6 +14,9 @@ import com.github.amadarain.itunes.ITunesLibrary;
 import com.github.amadarain.itunes.Track;
 import com.github.amadarain.itunes.Playlist;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class ParserState extends DefaultHandler {
     private ITunesLibrary.ITunesLibraryBuilder libBuilder;
     private Stack<State> states;
@@ -72,7 +75,7 @@ public class ParserState extends DefaultHandler {
     private class Plist extends StateBase {
         @Override
         public void start(String name) {
-            System.out.println("Plist: start " + name);
+            log.debug("Plist: start " + name);
             if (name.equals("key")) {
                 consumeText(it -> {
                     switch (it) {
@@ -87,7 +90,7 @@ public class ParserState extends DefaultHandler {
     private class Tracks extends StateBase {
         @Override
         public void start(String name) {
-            System.out.println("Tracks: start " + name);
+            log.debug("Tracks: start " + name);
             if (name.equals("key")) {
                 push(new BuildTrack());
             }
@@ -156,7 +159,7 @@ public class ParserState extends DefaultHandler {
     private class Playlists extends StateBase {
         @Override
         public void start(String name) {
-            System.out.println("Playlists: start " + name);
+            log.debug("Playlists: start " + name);
             if (name.equals("dict")) {
                 push(new BuildPlaylist());
             }
@@ -171,7 +174,7 @@ public class ParserState extends DefaultHandler {
         Playlist.PlaylistBuilder builder = Playlist.builder();
         @Override
         public void start(String name) {
-            System.out.println("BuildPlaylist: start " + name);
+            log.debug("BuildPlaylist: start " + name);
             switch (name) {
                 case "key":
                     storeKey();
@@ -212,7 +215,7 @@ public class ParserState extends DefaultHandler {
         }
         @Override
         public void start(String name) {
-            System.out.println("AddTrack: start " + name);
+            log.debug("AddTrack: start " + name);
             if (name.equals("integer")) {
                 consumeText(it -> listTracks.add(tracks.get(Integer.valueOf(it))));
             }
@@ -235,7 +238,7 @@ public class ParserState extends DefaultHandler {
         @Override public void end(String name) {
             pop();
             String value = sb.toString();
-            System.out.println("ConsumeValue: end " + name + ", value: " + value);
+            log.debug("ConsumeValue: end " + name + ", value: " + value);
             consumer.accept(value);
         }
         @Override public void text(String str) { sb.append(str); }
