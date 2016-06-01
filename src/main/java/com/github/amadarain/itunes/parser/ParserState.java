@@ -49,6 +49,9 @@ public class ParserState extends DefaultHandler {
         public void end(String name) {}
         public void text(String str) {}
 
+        protected void push(State state) { states.push(state); }
+        protected void pop() { states.pop(); }
+
         protected String currentKey = null;
         protected void setCurrentKey(String key) { currentKey = key; }
         protected void storeKey() { consumeText(this::setCurrentKey); }
@@ -58,21 +61,11 @@ public class ParserState extends DefaultHandler {
         }
     }
 
-    private void push(State state) { states.push(state); }
-    private void pop() { states.pop(); }
-
-    private State INIT() { return new Init(); }
-    private State PLIST() { return new Plist(); }
-    private State TRACKS() { return new Tracks(); }
-    private State BUILD_TRACK() { return new BuildTrack(); }
-    private State PLAYLISTS() { return new Playlists(); }
-    private State BUILD_PLAYLIST() { return new BuildPlaylist(); }
-
     private class Init extends StateBase {
         @Override
         public void start(String name) {
             if (name.equals("plist")) {
-                push(PLIST());
+                push(new Plist());
             }
         }
     }
@@ -83,8 +76,8 @@ public class ParserState extends DefaultHandler {
             if (name.equals("key")) {
                 consumeText(it -> {
                     switch (it) {
-                        case "Tracks": push(TRACKS()); break;
-                        case "Playlists": push(PLAYLISTS()); break;
+                        case "Tracks": push(new Tracks()); break;
+                        case "Playlists": push(new Playlists()); break;
                         default:
                     }
                 });
@@ -96,7 +89,7 @@ public class ParserState extends DefaultHandler {
         public void start(String name) {
             System.out.println("Tracks: start " + name);
             if (name.equals("key")) {
-                push(BUILD_TRACK());
+                push(new BuildTrack());
             }
         }
         @Override public void end(String name) {
@@ -165,7 +158,7 @@ public class ParserState extends DefaultHandler {
         public void start(String name) {
             System.out.println("Playlists: start " + name);
             if (name.equals("dict")) {
-                push(BUILD_PLAYLIST());
+                push(new BuildPlaylist());
             }
         }
         @Override public void end(String name) {
