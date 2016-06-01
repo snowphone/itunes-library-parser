@@ -71,11 +71,10 @@ class ParserSpec extends Specification {
 </plist>
 """)
         def lib = parser.parse(xml)
-        def track = lib.tracks[1234]
+        def track = lib.tracks[0]
         expect:
         lib.tracks.size() == 1
         track
-        track.trackId == 1234
         track.size == 3506304
         track.totalTime == 146050
         track.discNumber == 1
@@ -169,8 +168,8 @@ class ParserSpec extends Specification {
 """)
         def lib = parser.parse(xml)
         expect:
-        lib.tracks[1234].name == new String('透明な虹'.getBytes('utf-8'), 'utf-8')
-        println lib.tracks[1234].name
+        lib.tracks[0].name == new String('透明な虹'.getBytes('utf-8'), 'utf-8')
+        println lib.tracks[0].name
     }
     Reader createReader(String str) { new StringReader(new String(str.getBytes('utf-8'), 'utf-8')) }
 } 

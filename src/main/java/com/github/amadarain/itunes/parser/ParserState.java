@@ -97,13 +97,14 @@ public class ParserState extends DefaultHandler {
         }
         @Override public void end(String name) {
             if (name.equals("dict")) {
-                libBuilder.addTracks(tracks);
+                libBuilder.addTracks(new ArrayList<>(tracks.values()));
                 pop();
             }
         }
     }
     private class BuildTrack extends StateBase {
         Track.TrackBuilder builder = Track.builder();
+        Integer trackId;
         @Override
         public void start(String name) {
             switch (name) {
@@ -115,7 +116,7 @@ public class ParserState extends DefaultHandler {
                 case "string":
                     switch (currentKey) {
                         case "Track ID":
-                            consumeText(it -> builder.trackId(Integer.valueOf(it))); break;
+                            consumeText(it -> { trackId = Integer.valueOf(it); }); break;
                         case "Size":
                             consumeText(it -> builder.size(Integer.valueOf(it))); break;
                         case "Total Time":
@@ -151,7 +152,7 @@ public class ParserState extends DefaultHandler {
         @Override public void end(String name) {
             if (name.equals("dict")) {
                 Track track = builder.build();
-                tracks.put(track.getTrackId(), track);
+                tracks.put(trackId, track);
                 pop();
             }
         }
