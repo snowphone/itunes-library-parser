@@ -151,5 +151,5 @@ class ParserSpec extends Specification {
         expect:
         lib.tracks[0].name == '透明な虹'
     }
-    Reader createReader(String str) { new StringReader(new String(str.getBytes('utf-8'), 'utf-8')) }
+    Reader createReader(String str) { new StringReader(str) }
 } 
