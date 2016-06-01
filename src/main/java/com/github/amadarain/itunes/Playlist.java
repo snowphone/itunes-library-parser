@@ -13,12 +13,10 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @Builder
 public class Playlist {
-    private final int playlistId;
     private final String persistentId;
     private final String name;
     private final List<Track> tracks;
 
-    public int getPlaylistId() { return playlistId; }
     public String getPersistentId() { return persistentId; }
     public String getName() { return name; }
     public List<Track> getTracks() { return Collections.unmodifiableList(tracks); }

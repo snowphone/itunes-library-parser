@@ -3,19 +3,17 @@ package com.github.amadarain.itunes;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.github.amadarain.itunes.parser.Parser;
 
 public class ITunesLibrary {
     private final List<Track> tracks;
-    private final Map<Integer, Playlist> playlists;
+    private final List<Playlist> playlists;
 
-    public ITunesLibrary(List<Track> tracks, Map<Integer, Playlist> playlists) {
+    public ITunesLibrary(List<Track> tracks, List<Playlist> playlists) {
         this.tracks = Collections.unmodifiableList(tracks);
-        this.playlists = Collections.unmodifiableMap(playlists);
+        this.playlists = Collections.unmodifiableList(playlists);
     }
 
     public static ITunesLibrary parse(Path path) {
@@ -26,8 +24,8 @@ public class ITunesLibrary {
     public List<Track> getTracks() {
         return Collections.unmodifiableList(tracks);
     }
-    public Map<Integer, Playlist> getPlaylists() {
-        return Collections.unmodifiableMap(playlists);
+    public List<Playlist> getPlaylists() {
+        return Collections.unmodifiableList(playlists);
     }
 
     public static ITunesLibraryBuilder builder() {
@@ -35,19 +33,19 @@ public class ITunesLibrary {
     }
     public static class ITunesLibraryBuilder {
         private List<Track> tracks;
-        private Map<Integer, Playlist> playlists;
+        private List<Playlist> playlists;
 
         public ITunesLibraryBuilder() {
             tracks = new ArrayList<>();
-            playlists = new HashMap<>();
+            playlists = new ArrayList<>();
         }
 
         public ITunesLibraryBuilder addTracks(List<Track> tracks) {
             this.tracks.addAll(tracks);
             return this;
         }
-        public ITunesLibraryBuilder addPlaylists(Map<Integer, Playlist> playlits) {
-            this.playlists.putAll(playlists);
+        public ITunesLibraryBuilder addPlaylists(List<Playlist> playlits) {
+            this.playlists.addAll(playlists);
             return this;
         }
         public ITunesLibraryBuilder add(Track track) {
@@ -55,7 +53,7 @@ public class ITunesLibrary {
             return this;
         }
         public ITunesLibraryBuilder add(Playlist playlist) {
-            playlists.put(playlist.getPlaylistId(), playlist);
+            playlists.add(playlist);
             return this;
         }
         public ITunesLibrary build() {

@@ -184,8 +184,6 @@ public class ParserState extends DefaultHandler {
                 case "date":
                 case "string":
                     switch (currentKey) {
-                        case "Playlist ID":
-                            consumeText(it -> builder.playlistId(Integer.valueOf(it))); break;
                         case "Playlist Persistent ID":
                             consumeText(builder::persistentId); break;
                         case "Name": consumeText(builder::name); break;

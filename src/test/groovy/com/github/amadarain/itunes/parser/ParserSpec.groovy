@@ -137,10 +137,11 @@ class ParserSpec extends Specification {
         def lib = parser.parse(xml)
         expect:
         lib
-        lib.playlists[10]
-        lib.playlists[10].tracks
-        lib.playlists[10].tracks.size() == 2
-        lib.playlists[10].tracks.find { it.name == 'Track 1234' }
+        lib.playlists.size() == 1
+        lib.playlists[0]
+        lib.playlists[0].tracks
+        lib.playlists[0].tracks.size() == 2
+        lib.playlists[0].tracks.find { it.name == 'Track 1234' }
     }
     def "mojibake"() {
         def xml = createReader(
