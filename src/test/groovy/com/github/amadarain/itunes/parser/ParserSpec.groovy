@@ -3,6 +3,7 @@ package com.github.amadarain.itunes.parser;
 import java.nio.file.Paths
 
 import com.github.amadarain.itunes.ITunesLibrary
+import com.github.amadarain.itunes.Playlist
 
 import spock.lang.*
 
@@ -198,5 +199,13 @@ class ParserSpec extends Specification {
         notThrown(NullPointerException)
         tr == []
         pl == []
+    }
+    def "emply playlist returns empty list"() {
+        def pl = new Playlist(null, null, null)
+        when:
+        def tr = pl.tracks
+        then:
+        notThrown(NullPointerException)
+        tr == []
     }
 } 
