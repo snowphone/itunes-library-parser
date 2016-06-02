@@ -97,7 +97,7 @@ public class ParserState extends DefaultHandler {
         }
         @Override public void end(String name) {
             if (name.equals("dict")) {
-                libBuilder.addTracks(new ArrayList<>(tracks.values()));
+                libBuilder.tracks(new ArrayList<>(tracks.values()));
                 pop();
             }
         }
@@ -201,7 +201,7 @@ public class ParserState extends DefaultHandler {
         @Override public void end(String name) {
             if (name.equals("dict")) {
                 Playlist p = builder.build();
-                libBuilder.add(p);
+                libBuilder.playlist(p);
                 pop();
             }
         }
@@ -216,7 +216,7 @@ public class ParserState extends DefaultHandler {
         public void start(String name) {
             log.debug("AddTrack: start " + name);
             if (name.equals("integer")) {
-                consumeText(it -> listTracks.add(tracks.get(Integer.valueOf(it))));
+                consumeText(it -> builder.track(tracks.get(Integer.valueOf(it))));
             }
         }
         @Override public void end(String name) {
