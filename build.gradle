@@ -4,7 +4,7 @@ plugins {
     id 'maven'
 }
 
-group = 'com.github.amadarain.itunes'
+group = 'com.github.amadarain'
 archivesBaseName = 'itunes-library-parser'
 version = '0.1.0'
 
