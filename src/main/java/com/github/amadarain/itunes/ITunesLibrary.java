@@ -12,8 +12,10 @@ public class ITunesLibrary {
     private final List<Playlist> playlists;
 
     public ITunesLibrary(List<Track> tracks, List<Playlist> playlists) {
-        this.tracks = Collections.unmodifiableList(tracks);
-        this.playlists = Collections.unmodifiableList(playlists);
+        this.tracks = Collections.unmodifiableList(
+            tracks != null ? tracks : new ArrayList<>(0));
+        this.playlists = Collections.unmodifiableList(
+            playlists != null ? playlists : new ArrayList<>(0));
     }
 
     public static ITunesLibrary parse(Path path) {

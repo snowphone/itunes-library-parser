@@ -2,10 +2,14 @@ package com.github.amadarain.itunes.parser;
 
 import java.nio.file.Paths
 
+import com.github.amadarain.itunes.ITunesLibrary
+
 import spock.lang.*
 
 class ParserSpec extends Specification {
     Parser parser
+    Reader createReader(String str) { new StringReader(str) }
+
     def setup() {
         parser = new Parser()
     }
@@ -151,5 +155,48 @@ class ParserSpec extends Specification {
         expect:
         lib.tracks[0].name == '透明な虹'
     }
-    Reader createReader(String str) { new StringReader(str) }
+    def "playlists which have no list-item don't throw NPE at getTracks()"() {
+        def xml = createReader(
+"""<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Major Version</key><integer>1</integer>
+    <key>Minor Version</key><integer>1</integer>
+    <key>Application Version</key><string>12.3.2.35</string>
+    <key>Date</key><date>2016-02-10T16:05:37Z</date>
+    <key>Features</key><integer>5</integer>
+    <key>Show Content Ratings</key><true/>
+    <key>Library Persistent ID</key><string>7FE190A91827057C</string>
+    <key>Tracks</key><dict>
+        <key>1234</key><dict>
+            <key>Track ID</key><integer>1234</integer>
+            <key>Name</key><string>Track 1234</string>
+        </dict>
+    </dict>
+    <key>Playlists</key><array>
+        <dict>
+            <key>Playlist ID</key><integer>10</integer>
+            <key>Name</key><string>name</string>
+        </dict>
+    </array>
+</dict>
+</plist>
+""")
+        def lib = parser.parse(xml)
+        when:
+        lib.playlists[0].getTracks()
+        then:
+        notThrown(NullPointerException)
+    }
+    def "empty ITunesLibrary returns empty list"() {
+        def lib = new ITunesLibrary(null, null)
+        when:
+        def tr = lib.tracks
+        def pl = lib.playlists
+        then:
+        notThrown(NullPointerException)
+        tr == []
+        pl == []
+    }
 } 

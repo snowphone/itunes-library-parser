@@ -2,6 +2,7 @@ package com.github.amadarain.itunes;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.ArrayList;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -19,6 +20,9 @@ public class Playlist {
 
     public String getPersistentId() { return persistentId; }
     public String getName() { return name; }
-    public List<Track> getTracks() { return Collections.unmodifiableList(tracks); }
+    public List<Track> getTracks() {
+        return Collections.unmodifiableList(
+            tracks != null ? tracks : new ArrayList<>(0));
+    }
 }
 
