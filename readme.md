@@ -1,6 +1,22 @@
 # iTunes Library Parser
 
+requirements: JDK 8
+
+## Build
+
+    gradle build
+
+## Test
+
+    gradle test
+
+## Install to local Maven repository
+
+    gradle install
+
 ## Usage
+Install to local Maven repository or use [jitpack.io](https://jitpack.io/#am4dr/itunes-library-parser)
+
 ### Gradle
 ```groovy
 repositories {
@@ -9,15 +25,16 @@ repositories {
 }
 
 dependencies {
-    // see about [version] https://jitpack.io/#amadarain/itunes-library-parser
-    compile 'com.github.amadarain:itunes-library-parser:[version]'
+    // see https://jitpack.io/#am4dr/itunes-library-parser
+    compile 'com.github.am4dr:itunes-library-parser:[version]'
 }
 ```
-### Groovy example
+
+### Groovy script
 ```groovy
 @Grapes([
     @GrabResolver(name='jitpack.io', root='https://jitpack.io'),
-    @Grab('com.github.amadarain:itunes-library-parser:master'),
+    @Grab('com.github.am4dr:itunes-library-parser:[version]'),
 ])
 import com.github.am4dr.itunes.ITunesLibrary
 import java.nio.file.Paths
@@ -28,6 +45,7 @@ def lib = ITunesLibrary.parse(path)
 // print the names of all playlists
 lib.playlists.each { println it.name }
 ```
+
 ## License
 MIT
 
