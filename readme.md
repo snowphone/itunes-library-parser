@@ -19,7 +19,7 @@ dependencies {
     @GrabResolver(name='jitpack.io', root='https://jitpack.io'),
     @Grab('com.github.amadarain:itunes-library-parser:master'),
 ])
-import com.github.amadarain.itunes.ITunesLibrary
+import com.github.am4dr.itunes.ITunesLibrary
 import java.nio.file.Paths
 
 def path = Paths.get(System.getProperty('user.home'), 'Music', 'iTunes', 'iTunes Music Library.xml')

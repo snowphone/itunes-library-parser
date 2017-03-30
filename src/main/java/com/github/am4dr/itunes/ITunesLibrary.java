@@ -1,11 +1,11 @@
-package com.github.amadarain.itunes;
+package com.github.am4dr.itunes;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.github.amadarain.itunes.parser.Parser;
+import com.github.am4dr.itunes.parser.Parser;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

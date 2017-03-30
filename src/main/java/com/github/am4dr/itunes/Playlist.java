@@ -1,4 +1,4 @@
-package com.github.amadarain.itunes;
+package com.github.am4dr.itunes;
 
 import java.util.Collections;
 import java.util.List;

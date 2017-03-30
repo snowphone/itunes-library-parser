@@ -1,18 +1,16 @@
-package com.github.amadarain.itunes.parser;
+package com.github.am4dr.itunes.parser;
 
-import java.io.FileReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.net.URL;
 import java.nio.file.Path;
 
 import org.xml.sax.XMLReader;
 import org.xml.sax.InputSource;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import com.github.amadarain.itunes.ITunesLibrary;
+import com.github.am4dr.itunes.ITunesLibrary;
 
 
 public class Parser {

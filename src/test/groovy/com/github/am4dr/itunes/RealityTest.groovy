@@ -1,6 +1,5 @@
-package com.github.amadarain.itunes
+package com.github.am4dr.itunes
 
-import java.io.FileReader
 import java.nio.file.Paths
 
 import spock.lang.*

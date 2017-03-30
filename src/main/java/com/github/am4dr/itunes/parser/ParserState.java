@@ -1,4 +1,4 @@
-package com.github.amadarain.itunes.parser;
+package com.github.am4dr.itunes.parser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +7,11 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.function.Consumer;
 
+import com.github.am4dr.itunes.ITunesLibrary;
+import com.github.am4dr.itunes.Playlist;
+import com.github.am4dr.itunes.Track;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
-
-import com.github.amadarain.itunes.ITunesLibrary;
-import com.github.amadarain.itunes.Track;
-import com.github.amadarain.itunes.Playlist;
 
 import lombok.extern.slf4j.Slf4j;
 

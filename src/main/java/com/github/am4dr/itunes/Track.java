@@ -1,4 +1,4 @@
-package com.github.amadarain.itunes;
+package com.github.am4dr.itunes;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

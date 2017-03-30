@@ -4,9 +4,9 @@ plugins {
     id 'maven'
 }
 
-group = 'com.github.amadarain'
+group = 'com.github.am4dr'
 archivesBaseName = 'itunes-library-parser'
-version = '0.2.0-SNAPSHOT'
+version = '0.3.0'
 
 repositories {
     jcenter()

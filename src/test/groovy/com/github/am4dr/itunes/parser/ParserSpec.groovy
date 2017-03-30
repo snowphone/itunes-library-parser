@@ -1,9 +1,9 @@
-package com.github.amadarain.itunes.parser;
+package com.github.am4dr.itunes.parser
 
 import java.nio.file.Paths
 
-import com.github.amadarain.itunes.ITunesLibrary
-import com.github.amadarain.itunes.Playlist
+import com.github.am4dr.itunes.ITunesLibrary
+import com.github.am4dr.itunes.Playlist
 
 import spock.lang.*
 
