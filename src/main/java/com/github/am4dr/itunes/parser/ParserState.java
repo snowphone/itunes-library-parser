@@ -117,19 +117,23 @@ public class ParserState extends DefaultHandler {
                         case "Track ID":
                             consumeText(it -> { trackId = Integer.valueOf(it); }); break;
                         case "Size":
-                            consumeText(it -> builder.size(Integer.valueOf(it))); break;
+                            consumeText(it -> builder.size(Integer.parseInt(it))); break;
                         case "Total Time":
-                            consumeText(it -> builder.totalTime(Integer.valueOf(it))); break;
+                            consumeText(it -> builder.totalTime(Integer.parseInt(it))); break;
                         case "Disc Number":
-                            consumeText(it -> builder.discNumber(Integer.valueOf(it))); break;
+                            consumeText(it -> builder.discNumber(Integer.parseInt(it))); break;
                         case "Disc Count":
-                            consumeText(it -> builder.discCount(Integer.valueOf(it))); break;
+                            consumeText(it -> builder.discCount(Integer.parseInt(it))); break;
                         case "Track Number":
-                            consumeText(it -> builder.trackNumber(Integer.valueOf(it))); break;
+                            consumeText(it -> builder.trackNumber(Integer.parseInt(it))); break;
                         case "Bit Rate":
-                            consumeText(it -> builder.bitRate(Integer.valueOf(it))); break;
+                            consumeText(it -> builder.bitRate(Integer.parseInt(it))); break;
                         case "Sample Rate":
-                            consumeText(it -> builder.sampleRate(Integer.valueOf(it))); break;
+                            consumeText(it -> builder.sampleRate(Integer.parseInt(it))); break;
+                        case "Play Count":
+                            consumeText(it -> builder.playCount(Integer.parseInt(it))); break;
+                        case "Rating":
+                            consumeText(it -> builder.rating(Integer.parseInt(it))); break;
 
                         case "Persistent ID": consumeText(builder::persistentId); break;
                         case "Name": consumeText(builder::name); break;
