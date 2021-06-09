@@ -142,6 +142,7 @@ public class ParserState extends DefaultHandler {
                         case "Composer": consumeText(builder::composer); break;
                         case "Album": consumeText(builder::album); break;
                         case "Location": consumeText(builder::location); break;
+                        case "Genre": consumeText(builder::genre); break;
 
                         case "dict":
                         case "array":

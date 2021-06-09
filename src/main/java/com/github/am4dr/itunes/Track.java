@@ -26,6 +26,7 @@ public class Track {
     private final String composer;
     private final String album;
     private final String location;
+    private final String genre;
 
     public String getPersistentId() { return persistentId; }
     public int getSize() { return size; }
@@ -43,5 +44,6 @@ public class Track {
     public String getComposer() { return composer; }
     public String getAlbum() { return album; }
     public String getLocation() { return location; }
+    public String getGenre() { return genre; }
 }
 
