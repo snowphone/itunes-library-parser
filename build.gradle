@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.github.am4dr'
 archivesBaseName = 'itunes-library-parser'
-version = '0.4.1'
+version = '0.4.2'
 
 repositories {
     jcenter()

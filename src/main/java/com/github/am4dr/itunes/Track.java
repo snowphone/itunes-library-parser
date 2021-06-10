@@ -5,6 +5,8 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
+import java.time.ZonedDateTime;
+
 @ToString
 @EqualsAndHashCode
 @RequiredArgsConstructor
@@ -27,6 +29,7 @@ public class Track {
     private final String album;
     private final String location;
     private final String genre;
+    private final ZonedDateTime date;
 
     public String getPersistentId() { return persistentId; }
     public int getSize() { return size; }
@@ -45,5 +48,6 @@ public class Track {
     public String getAlbum() { return album; }
     public String getLocation() { return location; }
     public String getGenre() { return genre; }
+    public ZonedDateTime getDate() { return date; }
 }
 

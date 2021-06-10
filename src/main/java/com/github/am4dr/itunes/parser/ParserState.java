@@ -1,5 +1,8 @@
 package com.github.am4dr.itunes.parser;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -134,6 +137,8 @@ public class ParserState extends DefaultHandler {
                             consumeText(it -> builder.playCount(Integer.parseInt(it))); break;
                         case "Rating":
                             consumeText(it -> builder.rating(Integer.parseInt(it))); break;
+                        case "Play Date UTC":
+                            consumeText(it -> builder.date(Instant.parse(it).atZone(ZoneOffset.UTC))); break;
 
                         case "Persistent ID": consumeText(builder::persistentId); break;
                         case "Name": consumeText(builder::name); break;
